@@ -15,6 +15,7 @@ export default function Admin() {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'products' | 'orders' | 'settings' | 'admins'>('dashboard');
   const [adminEmails, setAdminEmails] = useState<{id: string, email: string}[]>([]);
   const [newAdminEmail, setNewAdminEmail] = useState('');
+  const [loginError, setLoginError] = useState<string | null>(null);
 
   // Settings State
   const [settings, setSettings] = useState({
@@ -213,10 +214,14 @@ export default function Admin() {
   };
 
   const handleLogin = async () => {
+    setLoginError(null);
     try {
+      console.log('Admin: Starting Google Login...');
       await signInWithPopup(auth, googleProvider);
-    } catch (e) {
-      console.error(e);
+      console.log('Admin: Login successful');
+    } catch (e: any) {
+      console.error('Admin: Login failed:', e);
+      setLoginError(e.message || 'Login failed. Please check if popups are blocked.');
     }
   };
 
@@ -293,6 +298,13 @@ export default function Admin() {
           >
             Sign in with Google
           </button>
+          
+          {loginError && (
+            <div className="mt-4 p-3 bg-red-50 text-red-600 rounded-xl text-xs font-medium border border-red-100">
+              {loginError}
+            </div>
+          )}
+
           {!user && <p className="mt-6 text-xs text-gray-400">Restricted Area. Authorized Personnel Only.</p>}
           {user && !isAdmin && (
             <div className="mt-6 p-4 bg-red-50 text-red-600 rounded-xl text-sm font-medium border border-red-100">

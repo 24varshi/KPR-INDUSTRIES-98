@@ -9,6 +9,15 @@ async function startServer() {
   const app = express();
   const PORT = 3000;
 
+  // Add health check
+  app.get('/api/health', (req, res) => res.json({ status: 'ok', env: process.env.NODE_ENV }));
+
+  // Basic logging
+  app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    next();
+  });
+
   // Vite middleware for development
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
