@@ -3,6 +3,7 @@ import { Home, ArrowLeft } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function NotFound() {
+  console.log('NotFound page rendered at:', window.location.pathname);
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center">
