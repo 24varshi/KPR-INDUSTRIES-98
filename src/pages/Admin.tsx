@@ -50,7 +50,7 @@ export default function Admin() {
       setUser(u);
       try {
         if (u) {
-          const isHardcodedAdmin = u.email === 'gsrinivasarao9699@gmail.com';
+          const isHardcodedAdmin = u.email === 'gsrinivasarao9699@gmail.com' || u.uid === 'PnLzgr2Zvkcp6u3lRPsQloW5CE02';
           let isDbAdmin = false;
 
           // Admin check
@@ -58,10 +58,18 @@ export default function Admin() {
             isDbAdmin = true;
           } else {
             try {
-              // Instead of listing all (which might be blocked), just check if the user's specific email doc exists
-              const emailDocRef = doc(db, 'admin_emails', u.email || 'none');
-              const adminEmailsSnap = await getDoc(emailDocRef);
-              isDbAdmin = adminEmailsSnap.exists();
+              // Also check the admins collection by UID to match security rules
+              const uidDocRef = doc(db, 'admins', u.uid);
+              const adminUidSnap = await getDoc(uidDocRef);
+              
+              if (adminUidSnap.exists()) {
+                isDbAdmin = true;
+              } else {
+                // Instead of listing all (which might be blocked), just check if the user's specific email doc exists
+                const emailDocRef = doc(db, 'admin_emails', u.email || 'none');
+                const adminEmailsSnap = await getDoc(emailDocRef);
+                isDbAdmin = adminEmailsSnap.exists();
+              }
             } catch (e) {
               console.log("Admin email check failed - user likely not admin", e);
             }
@@ -216,12 +224,15 @@ export default function Admin() {
   const handleLogin = async () => {
     setLoginError(null);
     try {
-      console.log('Admin: Starting Google Login...');
       await signInWithPopup(auth, googleProvider);
-      console.log('Admin: Login successful');
-    } catch (e: any) {
+    } catch (e) {
       console.error('Admin: Login failed:', e);
-      setLoginError(e.message || 'Login failed. Please check if popups are blocked.');
+      const error = e as { code?: string; message?: string };
+      if (error.code === 'auth/unauthorized-domain') {
+        setLoginError('This domain is not authorized in Firebase. Please add this domain to "Authorized domains" in Firebase Console > Authentication > Settings.');
+      } else {
+        setLoginError(error.message || 'Login failed. Please check if popups are blocked.');
+      }
     }
   };
 

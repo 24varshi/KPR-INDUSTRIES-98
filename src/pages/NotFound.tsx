@@ -3,7 +3,6 @@ import { Home, ArrowLeft } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function NotFound() {
-  console.log('NotFound page rendered at:', window.location.pathname);
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center">
@@ -19,7 +18,6 @@ export default function NotFound() {
         </motion.div>
         
         <h2 className="text-2xl font-bold mb-4">Page Not Found</h2>
-        <p className="text-gray-400 text-xs mb-4 font-mono">Path: {window.location.pathname}</p>
         <p className="text-gray-500 mb-10 leading-relaxed">
           The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
         </p>

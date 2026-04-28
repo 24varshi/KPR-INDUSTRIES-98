@@ -3,8 +3,6 @@ import { createServer as createViteServer } from 'vite';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-
 async function startServer() {
   const app = express();
   const PORT = 3000;
