@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ShieldCheck } from 'lucide-react';
+import { ShieldCheck, Star, Heart } from 'lucide-react';
 
 export default function About() {
   return (

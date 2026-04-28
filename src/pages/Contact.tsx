@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Phone, Mail, MapPin, MessageSquare, Send, Clock, Globe } from 'lucide-react';
+import { Phone, Mail, MapPin, MessageSquare } from 'lucide-react';
 import { useSettings } from '../context/SettingsContext';
 
 export default function Contact() {
@@ -102,15 +102,3 @@ export default function Contact() {
   );
 }
 
-function ContactCard({ icon, title, value, sub }: { icon: React.ReactNode, title: string, value: string, sub: string }) {
-  return (
-    <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex items-start space-x-4">
-      <div className="p-3 bg-brand-orange/10 rounded-2xl">{icon}</div>
-      <div>
-        <h4 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-1">{title}</h4>
-        <p className="text-xl font-bold text-brand-black mb-1">{value}</p>
-        <p className="text-sm text-gray-500">{sub}</p>
-      </div>
-    </div>
-  );
-}

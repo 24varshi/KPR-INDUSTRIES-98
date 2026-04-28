@@ -1,3 +1,8 @@
+export interface FirestoreTimestamp {
+  seconds: number;
+  nanoseconds: number;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -5,7 +10,7 @@ export interface Product {
   price: number;
   category: string;
   image: string;
-  createdAt?: any;
+  createdAt?: FirestoreTimestamp;
 }
 
 export interface CartItem extends Product {
@@ -21,7 +26,7 @@ export interface Order {
   totalAmount: number;
   status: 'pending' | 'confirmed' | 'delivered' | 'cancelled';
   paymentMethod: 'COD' | 'UPI';
-  createdAt: any;
+  createdAt: FirestoreTimestamp;
 }
 
 export interface Category {

@@ -81,8 +81,8 @@ export default function Admin() {
 
             dataUnsubscribes.push(onSnapshot(collection(db, 'orders'), (snap) => {
               setOrders(snap.docs.map(d => ({ id: d.id, ...d.data() } as Order)).sort((a, b) => {
-                const da = (a.createdAt as any)?.seconds || 0;
-                const db = (b.createdAt as any)?.seconds || 0;
+                const da = a.createdAt?.seconds || 0;
+                const db = b.createdAt?.seconds || 0;
                 return db - da;
               }));
             }, (err) => console.error("Orders listener error:", err)));
@@ -244,7 +244,7 @@ export default function Admin() {
     try {
       await deleteDoc(doc(db, 'products', id));
       console.log('Admin: Delete successful for', id);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Admin delete failed:', error);
       handleFirestoreError(error, OperationType.DELETE, `products/${id}`);
     }

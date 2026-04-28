@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowRight, Star, Truck, ShieldCheck, Heart, Phone, MessageCircle } from 'lucide-react';
+import { ArrowRight, Truck, Heart, Phone, MessageCircle } from 'lucide-react';
 import { useSettings } from '../context/SettingsContext';
 
 export default function Home() {
@@ -107,24 +107,3 @@ export default function Home() {
   );
 }
 
-function CategoryCard({ num, name, delay, black, orange }: { num: string, name: string, delay: number, black?: boolean, orange?: boolean }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay }}
-      className={`md:col-span-3 bento-card p-6 flex flex-col justify-between overflow-hidden relative group ${
-        black ? 'bg-brand-black text-white border-brand-black' : 
-        orange ? 'bg-brand-orange text-white border-brand-orange' : 'hover:border-brand-orange'
-      }`}
-    >
-      <div className="relative z-10">
-        <span className={`text-[10px] font-black uppercase tracking-widest opacity-60`}>{num}</span>
-        <h3 className="text-2xl font-black uppercase leading-tight mt-2">{name}</h3>
-      </div>
-      <Link to="/shop" className="relative z-10 mt-12 text-[10px] font-black uppercase tracking-widest hover:underline">
-        Explore Category &rarr;
-      </Link>
-    </motion.div>
-  );
-}

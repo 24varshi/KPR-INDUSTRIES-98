@@ -63,7 +63,7 @@ export default function Shop() {
     try {
       await deleteDoc(doc(db, 'products', id));
       console.log('Shop: Delete successful for', id);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Shop: Delete failed:', error);
       handleFirestoreError(error, OperationType.DELETE, `products/${id}`);
     }
