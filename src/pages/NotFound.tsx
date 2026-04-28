@@ -19,6 +19,7 @@ export default function NotFound() {
         </motion.div>
         
         <h2 className="text-2xl font-bold mb-4">Page Not Found</h2>
+        <p className="text-gray-400 text-xs mb-4 font-mono">Path: {window.location.pathname}</p>
         <p className="text-gray-500 mb-10 leading-relaxed">
           The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
         </p>
