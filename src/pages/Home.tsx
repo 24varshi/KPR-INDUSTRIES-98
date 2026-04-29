@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowRight, Truck, Heart, Phone, MessageCircle } from 'lucide-react';
+import { ArrowRight, Truck, Star, Phone, MessageCircle } from 'lucide-react';
 import { useSettings } from '../context/SettingsContext';
 
 export default function Home() {
@@ -49,7 +49,7 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Women Owned Highlight (4x1) */}
+        {/* Premium Quality Highlight (4x1) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -57,10 +57,10 @@ export default function Home() {
           className="md:col-span-4 bento-card bg-orange-50 border-orange-200 flex flex-col justify-center items-center text-center p-8 transition-colors hover:bg-orange-100"
         >
           <div className="w-16 h-16 bg-white border-2 border-brand-orange rounded-full flex items-center justify-center mb-4 shadow-sm">
-            <Heart className="text-brand-orange" size={32} />
+            <Star className="text-brand-orange" size={32} />
           </div>
-          <h3 className="text-xl font-black uppercase tracking-tight mb-2">Proudly Women-Owned</h3>
-          <p className="text-sm text-neutral-600">Supporting local entrepreneurship since 2018.</p>
+          <h3 className="text-xl font-black uppercase tracking-tight mb-2">Premium Quality</h3>
+          <p className="text-sm text-neutral-600">Manufacturing excellence in every basket since 2018.</p>
         </motion.div>
 
         {/* Quick Contact & WhatsApp (4x1) */}
